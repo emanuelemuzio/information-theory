@@ -1,8 +1,6 @@
 # Write a program in a programming language of your choice given an input text
 # find the Huffman encoding of the text. A decoding procedure to recover the
 # original message by starting from the Huffman encoding is also required.
-import numpy as np
-
 
 class Node:
     def __init__(self, parent, left_node = None, right_node = None, value = 0, key = ''):
@@ -109,8 +107,8 @@ def search(key, tree, string = ''):
         return search(key, tree.right_node, string + '1')
         
 if __name__ == '__main__':
-    # text = input("Insert the text you want to encode and then decode with Huffman's encoding: \n")
-    text = 'aeebcddegfced'
+    text = input("Insert the text you want to encode and then decode with Huffman's encoding: \n")
+    # text = 'aeebcddegfced'
     source = get_source(text)
     tree = build_tree(source)
     # BFSVisit(tree)
