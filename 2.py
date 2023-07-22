@@ -1,6 +1,8 @@
 # Write a program in a programming language of your choice given an input text
 # find the Huffman encoding of the text. A decoding procedure to recover the
 # original message by starting from the Huffman encoding is also required.
+import numpy as np
+
 
 class Node:
     def __init__(self, parent, left_node = None, right_node = None, value = 0, key = ''):
@@ -9,8 +11,6 @@ class Node:
         self.right_node = right_node
         self.value = value
         self.key = key
-
-text = 'LABELLALILLIBALLA'
         
 def get_source(text : str):
     source = {}
@@ -70,7 +70,8 @@ def huffman_encode(text, tree):
     
     return encoding
 
-def huffman_decode(text, tree):
+def huffman_decode(text, tree, source):
+    decoding_table = {}
     decoding = ''
     halt = False
     
@@ -78,22 +79,26 @@ def huffman_decode(text, tree):
         next_bit = text[0]
         next_node = tree 
         cont = 0
+        string_accumulator = ''
         
         while next_node.left_node is not None and next_node.right_node is not None and not halt:
+            string_accumulator = string_accumulator + next_bit
             if next_bit == '0':
                 next_node = next_node.left_node
             elif next_bit == '1':
                 next_node = next_node.right_node
-            if cont == len(text):
-                halt = True
             cont = cont + 1
             if cont == len(text):
                 halt = True
             next_bit = text[cont] if not halt else ''
         decoding = decoding + next_node.key
+        if decoding_table.get(next_node.key) == None:
+            decoding_table[next_node.key] = {}
+            decoding_table[next_node.key]['prob'] = next_node.value
+            decoding_table[next_node.key]['codeword'] = string_accumulator
         text = text[-len(text)+cont:]
         
-    return decoding
+    return decoding, decoding_table
         
 def search(key, tree, string = ''):
     if key == tree.key:
@@ -104,11 +109,14 @@ def search(key, tree, string = ''):
         return search(key, tree.right_node, string + '1')
         
 if __name__ == '__main__':
+    # text = input("Insert the text you want to encode and then decode with Huffman's encoding: \n")
+    text = 'aeebcddegfced'
     source = get_source(text)
     tree = build_tree(source)
     # BFSVisit(tree)
     encoded_text = huffman_encode(text, tree)
-    decoded_text = huffman_decode(encoded_text, tree)
+    decoded_text, decoding_table = huffman_decode(encoded_text, tree, source)
     print(f'Original text: {text}')
     print(f'Encoded text: {encoded_text}')
     print(f'Decoded text: {decoded_text}')
+    print(f'Decoding table: {decoding_table}')
