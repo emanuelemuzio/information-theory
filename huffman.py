@@ -117,4 +117,6 @@ if __name__ == '__main__':
     print(f'Original text: {text}')
     print(f'Encoded text: {encoded_text}')
     print(f'Decoded text: {decoded_text}')
-    print(f'Decoding table: {decoding_table}')
+    print(f'Decoding table: ')
+    for key in decoding_table.keys():
+        print(f"{key} | {decoding_table[key]['prob']} | {decoding_table[key]['codeword']}")
