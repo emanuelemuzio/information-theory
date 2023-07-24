@@ -1,7 +1,5 @@
 import huffman
 
-integer = int(input ('Enter an integer greater than 0: \n'))
-
 def find_exp(integer):
     N = 0
     
@@ -50,12 +48,61 @@ def delta_decode(encoding):
         
     return decoding
 
+def get_fib_sequence(N):
+    i = 1
+    fib_list = [0, 1]
+    
+    while fib_list[i] + fib_list[i - 1] <= N:
+        fib_list.append(fib_list[i] + fib_list[i - 1])
+        i = i + 1
+    
+    return fib_list[2:]
+
+def get_fib_number(i):
+    a, b = 0, 1
+    for x in range(i):
+        a, b = b, a + b
+    return a
+
+def fibonacci_encoding(N):
+    fib_sequence = get_fib_sequence(N)
+    encoding = ['0'] * len(fib_sequence)
+    
+    while N > 0:
+        fib_sequence = get_fib_sequence(N)
+        largest_fib = max(fib_sequence)
+        N = N - largest_fib
+        i  = fib_sequence.index(largest_fib)
+        encoding[i] = '1' 
+            
+    encoding.append('1')
+        
+    return "".join(encoding)
+
+def fibonacci_decoding(fib_enc):
+    fib_enc = list(fib_enc)[:-1]
+    decoding = []
+    pos = 2
+    
+    for bit in fib_enc:        
+        if bit == '1':
+            decoding.append(get_fib_number(pos))
+        pos = pos + 1
+    
+    return decoding
+
+integer = int(input ('Enter an integer greater than 0: \n'))
+
 gamma_enc = gamma_encode(integer)
 gamma_dec = gamma_decode(gamma_enc)
 delta_enc = delta_encode(integer)
 delta_dec = delta_decode(delta_enc)
+fib_enc = fibonacci_encoding(integer)
+fib_dec = fibonacci_decoding(fib_enc)
 
 print(f'The gamma encoded integer is {gamma_enc}')
 print(f'The gamma decoded integer is {gamma_dec}')
 print(f'The delta encoded integer is {delta_enc}')
 print(f'The delta decoded integer is {delta_dec}')
+print(f'The Fibonacci encoded integer is {fib_enc}')
+print(f'The Fibonacci decoded integer is {fib_dec}')
