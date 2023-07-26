@@ -9,7 +9,7 @@ class Halt:
         self.halt = halt
         self.UD = UD
     def __str__(self):
-        return f'The algorithm halted. {self.UD}'
+        return f'The algorithm halted because {self.UD}\n'
     
 def check_suffix(a, b):
     if a.startswith(b):
@@ -27,14 +27,12 @@ def halt(s, s0, si):
     intersec = intersection(s0, si)
     
     if len(si) == 0:
-        return Halt(True, 'The code is UD')
+        return Halt(True, 'the last set is empty, the code is UD')
     if len(intersec) > 0:
-        return Halt(True, 'The code is not UD')
-    if len(si) == 0:
-        return Halt(True, 'The code is UD')
+        return Halt(True, f'the last set has an element in common with the code set, the code is not UD')
     for j in range(0, len(s)):
         if sorted(si) == sorted(s[j]):
-            return Halt(True, 'The code is UD')
+            return Halt(True, f'the last set and the {j + 1}-th are equal, the code is UD')
     return Halt(False, '')
     
     
@@ -53,9 +51,11 @@ def sardinas_patterson(code : list):
                     s[i].append(w)
         halting = halt(suffixes, s[0], s[i])
         suffixes.append(s[i])
-    print(s)
+        
+    print(f'The code is:\n{s[0]}')
+    for i in range(1, len(s)):
+        print(s[i])
     print(halting)
-    print("")
 
 C = ['012', '0123', '4', '310', '1024', '2402', '2401', '4013']
 C1 = ['10','010','1','1110']
@@ -63,40 +63,10 @@ C2 = ['0','001','101','11']
 C3 = ['0','2','03','011','104','341','11234']
 C4 = ['01','10','001','100','000','111']
 
-def print_menu():
+codes = [C, C1, C2, C3, C4]
     
-    C_option = ", ".join(C)
-    C1_option = ", ".join(C1)
-    C2_option = ", ".join(C2)
-    C3_option = ", ".join(C3)
-    C4_option = ", ".join(C4)
-    
-    print(f"1. Test [{C_option}] ")
-    print(f"2. Test [{C1_option}]")
-    print(f"3. Test [{C2_option}]")
-    print(f"4. Test [{C3_option}]")
-    print(f"5. Test [{C4_option}]")
-    print("6. Exit")
-
-if __name__ == '__main__':
-    options = [C, C1, C2, C3, C4]
-    
-    loop = True
-
-    while loop:
-        print_menu()
-        
-        print("")
-        choice = int(input("Enter your choice [1-6]: \n"))
-        print("")
-        
-        if choice in range(1, len(options)):
-            sardinas_patterson(options[choice - 1])
-        elif choice == (len(options) + 1):
-            loop = False
-            print('Exiting...')
-        elif not choice in range(1, len(options)):
-            print("Wrong menu selection, try again")
+for code in codes:
+        sardinas_patterson(code)
         
     
             

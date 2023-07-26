@@ -108,10 +108,8 @@ def search(key, tree, string = ''):
         
 if __name__ == '__main__':
     text = input("Insert the text you want to encode and then decode with Huffman's encoding: \n")
-    # text = 'aeebcddegfced'
     source = get_source(text)
     tree = build_tree(source)
-    # BFSVisit(tree)
     encoded_text = huffman_encode(text, tree)
     decoded_text, decoding_table = huffman_decode(encoded_text, tree, source)
     print(f'Original text: {text}')
