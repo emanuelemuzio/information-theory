@@ -80,7 +80,7 @@ def get_fib_number(i):
         a, b = b, a + b
     return a
 
-def fibonacci_encoding(N):
+def fibonacci_encode(N):
     fib_sequence = get_fib_sequence(N)
     encoding = ['0'] * len(fib_sequence)
     
@@ -95,7 +95,7 @@ def fibonacci_encoding(N):
         
     return "".join(encoding)
 
-def fibonacci_decoding(fib_enc):
+def fibonacci_decode(fib_enc):
     fib_enc = list(fib_enc)[:-1]
     decoding = []
     pos = 2
@@ -129,7 +129,7 @@ def delta_len(integer):
     return len(delta_encode(integer))
 
 def fibonacci_len(integer):
-    return len(fibonacci_encoding(integer))
+    return len(fibonacci_encode(integer))
 
 def rice_len(integer, k):
     return len(rice_encode(integer, k))
@@ -214,7 +214,6 @@ exp_3 = list(range(50, 250)) + list(range(600, 1200)) + list(range(2000, 2100)) 
 res_1 = exp(exp_1)
 res_2 = exp(exp_2)
 res_3 = exp(exp_3)
-print('Done')   
 
 experiments = [exp_1, exp_2, exp_3]
 results = [res_1, res_2, res_3] 
