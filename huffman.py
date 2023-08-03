@@ -1,7 +1,3 @@
-# Write a program in a programming language of your choice given an input text
-# find the Huffman encoding of the text. A decoding procedure to recover the
-# original message by starting from the Huffman encoding is also required.
-
 class Node:
     def __init__(self, parent, left_node = None, right_node = None, value = 0, key = ''):
         self.parent = parent
@@ -105,16 +101,3 @@ def search(key, tree, string = ''):
         return search(key, tree.left_node, string + '0')
     if not tree.right_node is None and key in tree.right_node.key:
         return search(key, tree.right_node, string + '1')
-        
-if __name__ == '__main__':
-    text = input("Insert the text you want to encode and then decode with Huffman's encoding: \n")
-    source = get_source(text)
-    tree = build_tree(source)
-    encoded_text = huffman_encode(text, tree)
-    decoded_text, decoding_table = huffman_decode(encoded_text, tree, source)
-    print(f'Original text: {text}')
-    print(f'Encoded text: {encoded_text}')
-    print(f'Decoded text: {decoded_text}')
-    print(f'Decoding table: ')
-    for key in decoding_table.keys():
-        print(f"{key} | {decoding_table[key]['prob']} | {decoding_table[key]['codeword']}")
