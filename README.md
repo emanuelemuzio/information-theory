@@ -1,5 +1,5 @@
 # Teoria dell'informazione e compressione dei dati
-Portfolio di esercizi per l'esame.
+Portfolio di esercizi per l'esame realizzati usando Python (3.10)
 
 ## Esercizi
 
