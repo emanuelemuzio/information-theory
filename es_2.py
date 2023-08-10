@@ -1,6 +1,7 @@
 # Write a program in a programming language of your choice given an input text
 # find the Huffman encoding of the text. A decoding procedure to recover the
 # original message by starting from the Huffman encoding is also required.
+
 import huffman as h
         
 if __name__ == '__main__':

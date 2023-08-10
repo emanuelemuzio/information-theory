@@ -2,7 +2,7 @@
 
 # b. Apply the algorithm to test whether C={012, 0123, 4, 310, 1024, 2402, 2401, 4013} is UD.
 
-# c. Apply the algorithm to verify which of the codes C1 = 10, 010, 1, 1110 , 𝐶2 = 0, 001, 101, 11 , 𝐶3 = 0, 2, 03, 011, 104, 341, 11234 , 𝐶4 = {01,10,001,100,000,111} are UD.
+# c. Apply the algorithm to verify which of the codes C1 = { 10, 010, 1, 1110 }, 𝐶2 = { 0, 001, 101, 11} , 𝐶3 = {0, 2, 03, 011, 104, 341, 11234} , 𝐶4 = {01,10,001,100,000,111} are UD.
 import sardinas_patterson as sp
 
 C = ['012', '0123', '4', '310', '1024', '2402', '2401', '4013']
