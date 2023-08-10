@@ -33,4 +33,7 @@ Per il terzo esperimento è stata scelta una distribuzione arbitraria di valori 
 
 Il risultato è stato il seguente insieme di grafici:
 
-![alt text](https://github.com/emanuelemuzio/information-theory/blob/main/es_3_report.png?raw=true)
+![alt text](https://github.com/emanuelemuzio/information-theory/blob/main/es_3_report_1.png?raw=true)
+![alt text](https://github.com/emanuelemuzio/information-theory/blob/main/es_3_report_2.png?raw=true)
+![alt text](https://github.com/emanuelemuzio/information-theory/blob/main/es_3_report_3.png?raw=true)
+![alt text](https://github.com/emanuelemuzio/information-theory/blob/main/es_3_report_4.png?raw=true)
