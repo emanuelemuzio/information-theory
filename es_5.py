@@ -1,4 +1,4 @@
-# Portfolio: Write a program in a programming language
+# Write a program in a programming language
 # of your choice that, given a string T, construct the
 # grammar produced by the algorithm RE-PAIR.
 # Implement also the construction of the grammar in the
@@ -18,4 +18,6 @@ print(f'Compressed w: {w}')
 print(f'Compression dictionary: {dictionary}')
 print(f'Decoded dictionary: {RP_dec}')
 print(f'CNF grammar: {cnf}')
+print(f'RE-PAIR grammar size: {len(dictionary)}')
+print(f'CNF grammar size: {len(cnf)}')
 

@@ -37,3 +37,24 @@ Il risultato è stato il seguente insieme di grafici:
 ![alt text](https://github.com/emanuelemuzio/information-theory/blob/main/es_3_report_2.png?raw=true)
 ![alt text](https://github.com/emanuelemuzio/information-theory/blob/main/es_3_report_3.png?raw=true)
 ![alt text](https://github.com/emanuelemuzio/information-theory/blob/main/es_3_report_4.png?raw=true)
+
+### Es. 4
+
+Write a program in a programming language of your choice, that given a text T outputs the LZ77 encoding and the LZss encoding of the text. 
+
+A paramter of the program should be W, the length of the search buffer.
+
+Compare the number of triplets denoted by z produced by LZ77(T) (or by LZss) and the number of the equal-letter runs denoted by r produced by the BWT(T).
+
+Stringa di esempio: 'babbababbaabbaabaabaaa'
+
+![alt text](https://github.com/emanuelemuzio/information-theory/blob/main/es_4_report.png?raw=true)
+
+
+### Es. 5
+
+Write a program in a programming language of your choice that, given a string T, construct the grammar produced by the algorithm RE-PAIR.
+
+Implement also the construction of the grammar in the Chomsky normal form.
+
+Compute also the size of the grammar in both cases.
