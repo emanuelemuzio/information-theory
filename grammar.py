@@ -62,36 +62,6 @@ def REPAIR_decode(w, dictionary):
         w = w.replace(key, dictionary[key])
     return w
 
-<<<<<<< HEAD
-#Ottenimento grammatica CNF
-
-def CNF(S):
-    
-    symbols = []
-    for s in S:
-        if not s in symbols:
-            symbols.append(s)
-
-    #Ottenimento regole terminali
-        
-    terminal = {}
-    for s in symbols:
-        terminal[f'F{len(terminal)}'] = s 
-        
-    non_terminal = {}
-
-    #Regole non terminali
-    
-    for rule1 in terminal:
-        for rule2 in terminal:
-            if rule1 != rule2:
-                if (terminal[rule1] + terminal[rule2]) in S:
-                    non_terminal[f'F{len(terminal) + len(non_terminal)}'] = s 
-                elif (terminal[rule2] + terminal[rule1]) in S:
-                    non_terminal[f'F{len(terminal) + len(non_terminal)}'] = s 
-
-    #Stesso processo di RE-PAIR
-=======
 def CNF(dictionary):    
     cnf = {}
     
@@ -107,8 +77,6 @@ def CNF(dictionary):
             cnf[string.ascii_uppercase[i + t + 1]] = (tmp_set[t]).upper()
     
     return cnf
-            
->>>>>>> 8cd62c524a293d674736285e6968b72057ed8e9a
                     
 def CNF_decode(prod, productions):
     while True:
