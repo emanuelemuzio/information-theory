@@ -1,3 +1,5 @@
+#Ordino alfabeticamente tutte le permutazioni della stringa T e conservo in I l'indice di T, il risultato della codifica BWT è l'ultima colonna della "matrice" di permutazioni ottenuta e l'indice I utile alla decodifica
+
 def BWT_encode(T):
     permutations = []
     for i in range(0, len(T)):
@@ -12,6 +14,8 @@ def BWT_encode(T):
     for p in sorted_permutations:
         word = word + p[-1]
     return word, I    
+
+#Codifica LZ77 tramite dizionario e sliding window di una stringa : nel search buffer abbiamo la parte già codificata, nel loook-ahead quella da codificare
 
 def LZ77_encode(T, w):
     encoding = []
@@ -36,6 +40,11 @@ def boundary_check(sequence, look_ahead_buffer):
         return -1
     else:
         return len(max(longest_subs, key=len))
+    
+#Cerchiamo la sequenza più lunga in comune tra i due buffer e costruiamo triplette (o, l, s))
+# o è l'offset tra la sequenza nel search buffer e quella nel look-ahead buffer
+# l è la lunghezza della sequenza
+# s è il simbolo che appare nel look-ahead buffer come prefisso dopo la sequenza
             
 def LZ77_step(search_buffer, look_ahead_buffer, w):
     longest_subs = []
@@ -78,6 +87,8 @@ def LZ77_step(search_buffer, look_ahead_buffer, w):
                 
         return triplet, new_search_buffer, new_look_ahead_buffer
     
+#Il processo di decodifica delle triplette è molto semplice: considerato un offset dalla fine della stringa di o, copio i successivi l caratteri e aggiungo s alla codifica
+    
 def LZ77_decode(lz77_enc):
     decoding = ''
     
@@ -91,6 +102,8 @@ def LZ77_decode(lz77_enc):
         decoding = decoding + triplet_seq + boundary_seq
     return decoding
 
+#Molto simile a LZ77 ma prevede coppie piuttosto che triplette: se non troviamo una corrispondenza tra i due buffer, allora avremo (0, s), in caso contrario se troviamo una sequenza ripetuta avremo una coppia con offset e lunghezza della sequenza
+
 def LZss_encode(T, w):
     encoding = []
     search_buffer = ''
@@ -100,6 +113,8 @@ def LZss_encode(T, w):
         pair, search_buffer, look_ahead_buffer = LZss_step(search_buffer, look_ahead_buffer, w)
         encoding.append(pair)
     return encoding
+
+#Versione adattata all LZss dello step di codifica e ricerca sequenza più lunga tra buffer
             
 def LZss_step(search_buffer, look_ahead_buffer, w):
     longest_subs = []
@@ -130,6 +145,8 @@ def LZss_step(search_buffer, look_ahead_buffer, w):
                 
         return pair, new_search_buffer, new_look_ahead_buffer
    
+#Processo di decodifica simile a quello già visto: aggiungiamo semplicemente la lettera alla fine se troviamo una coppia (0, s), in caso contrario procediamo con la copia di l lettere a partire da un offset o (o, l)
+
 def LZss_decode(lzss_enc):
     decoding = ''
     
@@ -140,6 +157,8 @@ def LZss_decode(lzss_enc):
             seq = decoding[-x : len(decoding) - x + y]
             decoding = decoding + seq
     return decoding
+
+#Funzione per il conteggio delle sequenze di lettere uguali per BWT
     
 def equal_letter_runs(T):
     runs = []

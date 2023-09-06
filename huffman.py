@@ -1,3 +1,5 @@
+#Classe helper nodo per la creazione dell'albero di codifica
+
 class Node:
     def __init__(self, parent, left_node = None, right_node = None, value = 0, key = ''):
         self.parent = parent
@@ -5,7 +7,9 @@ class Node:
         self.right_node = right_node
         self.value = value
         self.key = key
-        
+
+#Funzione per l'ottenimento di sorgente e probabilità associata a ciascun elemento dell'alfabeto, quest'ultimo ordinato in modo decrescente        
+
 def get_source(text : str):
     source = {}
     for i in range(len(text)):
@@ -18,35 +22,29 @@ def get_source(text : str):
     for entry in tmp:
         tmp[entry] = round(tmp[entry]/max,2)
     return tmp
-        
-def BFSVisit(tree):
-    queue = [tree]
-    
-    while len(queue) > 0:
-        curr = queue.pop(0)
-        print(f'{curr.key} : {curr.value}')
-        
-        if curr.left_node is not None:
-            queue.append(curr.left_node)
-        
-        if curr.right_node is not None:
-            queue.append(curr.right_node)
-            
+
+#Costruzione dell'albero a partire dall'alfabeto sorgente
         
 def build_tree(source : str):
     nodes = []
     
     for symbol, frequency in source.items():
+        #Creo i nodi contenenti solo l'info su simbolo e sua frequenza
         node = Node(None, None, None, frequency, symbol)
         nodes.append(node)
         
     while len(nodes) > 2:
+        #Il dizionario è già ordinato, per cui posso semplicemente andare a fare .pop() sui primi due elementi, sapendo che il primo sarà il maggiore e quindi il nodo destro
         right_node = nodes.pop()
         left_node = nodes.pop()
+        
+        #Creazione nodo padre 
         parent = Node(None, left_node, right_node, left_node.value + right_node.value, f'{left_node.key},{right_node.key}')
         left_node.parent = parent
         right_node.parent = parent
         nodes.append(parent)
+        
+        #Aggiorno la lista di nodi
         nodes = sorted(nodes, key=lambda x: x.value, reverse=True)
     
     right_node = nodes.pop()
@@ -55,6 +53,8 @@ def build_tree(source : str):
     
     return tree
         
+#Una volta ottenuto l'albero di codifica, semplicemente vado a codificare ogni lettera del testo originale, che a questo punto sarà rappresentata dal "percorso" per raggiungere il nodo che contiene il suo simbolo
+
 def huffman_encode(text, tree):
     encoding = ''
     
@@ -64,11 +64,15 @@ def huffman_encode(text, tree):
     
     return encoding
 
-def huffman_decode(text, tree, source):
+#A 
+
+def huffman_decode(text, tree):
     decoding_table = {}
     decoding = ''
     halt = False
     
+    #Scorro il testo codificato cercando corrispondenze nell'albero fino a trovare una foglia, continuo finchè non ho 'esaurito' la stringa codificata
+
     while len(text) > 0 and not halt:
         next_bit = text[0]
         next_node = tree 
@@ -94,6 +98,8 @@ def huffman_decode(text, tree, source):
         
     return decoding, decoding_table
         
+#Funzione ricorsiva per la ricerca di una chiave nell'albero
+
 def search(key, tree, string = ''):
     if key == tree.key:
         return string

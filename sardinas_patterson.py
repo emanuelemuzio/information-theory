@@ -1,3 +1,5 @@
+#Classe per decidere se l'algoritmo deve continuare o procedere e, in caso di fermata, conservazione dell'esito
+
 class Halt:
     def __init__(self, halt : bool, UD : str):
         self.halt = halt
@@ -5,6 +7,8 @@ class Halt:
     def __str__(self):
         return f'The algorithm halted because {self.UD}\n'
     
+#Ottengo tutti i suffissi w tali che a = bw o b = aw, con a e b codeword da s0 e dall'i-esimo insieme di suffissi considerato
+
 def check_suffix(a, b):
     if a.startswith(b):
         return a.replace(b,'',1)
@@ -13,9 +17,12 @@ def check_suffix(a, b):
     else:
         return ''
 
+#Controllo per uno dei tre criteri di fermata
+
 def intersection(a, b):
     return list(set(a) & set(b))
     
+#Verifica dei tre criteri di fermata dell'algoritmo: l'i-esimo insieme di suffissi è vuoto, c'è un elemento in comune tra s0 e l'ultimo insieme trovato, s0 e si sono identici
 
 def halt(s, s0, si):
     intersec = intersection(s0, si)

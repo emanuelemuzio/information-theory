@@ -8,7 +8,7 @@ if __name__ == '__main__':
     source = h.get_source(text)
     tree = h.build_tree(source)
     encoded_text = h.huffman_encode(text, tree)
-    decoded_text, decoding_table = h.huffman_decode(encoded_text, tree, source)
+    decoded_text, decoding_table = h.huffman_decode(encoded_text, tree)
     print(f'Original text: {text}')
     print(f'Encoded text: {encoded_text}')
     print(f'Decoded text: {decoded_text}')
