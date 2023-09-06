@@ -19,7 +19,9 @@ import universal_encoding as ue
 
 x = range(1, 1000)
 
-plt.subplot(3, 3, 1)
+plt.figure("Figure 1")
+
+plt.subplot(2, 1, 1)
 
 gamma_y = list(map(ue.gamma_len, x))
 delta_y = list(map(ue.delta_len, x))
@@ -34,7 +36,7 @@ plt.title('Gamma, Delta, Fibonacci')
 plt.xlabel('N')
 plt.ylabel('Encoding length')
 
-plt.subplot(3, 3, 2)
+plt.subplot(2, 1, 2)
 
 for k in ue.k_values:
     rice_y = []
@@ -59,7 +61,8 @@ experiments = [exp_1, exp_2, exp_3]
 results = [res_1, res_2, res_3] 
 
 for index in range(0, len(results)):
-    plt.subplot(3, 3, index + 3)
+    plt.figure(f'Experiment {index + 1}')
+    plt.subplot(1, 1, 1)
 
     res = results[index]
 
@@ -84,6 +87,6 @@ plt.subplots_adjust(left=0.1,
                     bottom=0.1,
                     right=0.9,
                     top=0.9,
-                    wspace=0.4,
-                    hspace=0.4)
+                    wspace=0.6,
+                    hspace=0.8)
 plt.show()
