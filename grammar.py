@@ -62,6 +62,8 @@ def REPAIR_decode(w, dictionary):
         w = w.replace(key, dictionary[key])
     return w
 
+#Costruisco una grammatica nella CNF a partire dal dizionario di RE-PAIR: il passo principale è la rimozione e sostituzione dei simboli nella grammatica precedentemente costruita 
+
 def CNF(dictionary):    
     cnf = {}
     
